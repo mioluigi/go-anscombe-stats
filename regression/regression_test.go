@@ -210,9 +210,12 @@ func assertFit(t *testing.T, got, want Fit, tolerance float64) {
 	assertClose(t, "mean y", got.MeanY, want.MeanY, tolerance)
 }
 
+// assertClose fails when got is not within tolerance of want. NaN is checked
+// explicitly because every comparison with NaN is false, so a plain
+// "difference > tolerance" test would silently accept a NaN result.
 func assertClose(t *testing.T, label string, got, want, tolerance float64) {
 	t.Helper()
-	if math.Abs(got-want) > tolerance {
+	if math.IsNaN(got) || math.Abs(got-want) > tolerance {
 		t.Errorf("%s = %.10g, want %.10g (tolerance %g)", label, got, want, tolerance)
 	}
 }

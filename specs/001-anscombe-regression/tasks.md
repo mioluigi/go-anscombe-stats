@@ -48,7 +48,7 @@
 
 ## Phase 3 — Package `regression` (FR-2, FR-3, FR-6)
 
-- [ ] **T06 🔴 Tests for `regression.FitLine`** (table-driven)
+- [x] **T06 🔴 Tests for `regression.FitLine`** (table-driven)
   - Anscombe: 4 sets × intercept, slope, R², mean x, mean y vs. spec §5 (tolerance 1e-3)
   - Synthetic (AC-1a): y = 2x + 1; a negative slope; a horizontal line (R² pinned at 0 — package behavior)
   - Set IV pattern (AC-1b); all-identical x → `errors.Is(err, ErrConstantX)` **and** `errors.Is(err, stats.ErrBounds)`
@@ -56,7 +56,7 @@
   - Precision guard: vs. independent closed-form OLS written in the test, tolerance 1e-9
   Done when: `go test ./regression/` **fails**.
 
-- [ ] **T07 🟢 Implement `regression.FitLine`**
+- [x] **T07 🟢 Implement `regression.FitLine`**
   Including the *why* comment on back-deriving coefficients (plan §4) and wrapped errors.
   Done when: `go test -cover ./regression/` passes with ≥ 90% coverage; `go vet ./...` clean.
 
