@@ -1,0 +1,12 @@
+R version 4.4.2 (2024-10-31) · bench 1.1.4
+Data: anscombe.csv (4 sets)
+
+Linear regression of y on x (lm)
+Set    n  Intercept    Slope       R²   Mean x   Mean y
+I     11     3.0001   0.5001   0.6665   9.0000   7.5009
+II    11     3.0009   0.5000   0.6662   9.0000   7.5009
+III   11     3.0025   0.4997   0.6663   9.0000   7.5000
+IV    11     3.0017   0.4999   0.6667   9.0000   7.5009
+
+Unit of work: fit all 4 sets once; median of 1000 runs after 10 warm-up runs
+benchmark language=r library=lm runs=1000 median_us=900.2 alloc_kb=1.8
