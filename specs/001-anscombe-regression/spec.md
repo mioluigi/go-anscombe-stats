@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **DRAFT v2 — Gemini review incorporated (see `docs/reviews/001-spec-review.md`); awaiting answers to section 11** |
+| Status | **APPROVED v2 — 2026-10-18** (Gemini review: `docs/reviews/001-spec-review.md`; decisions: section 11) |
 | Owner | Luis Varela |
 | Course deliverable | Week 4 Assignment: Go for Statistics (100 pts) |
 | Governing rules | `docs/constitution.md` |
@@ -103,6 +103,7 @@ Consequences:
 - Coefficients must be **derived** from two fitted points with distinct x values:
   `slope = (ŷ₂ − ŷ₁) / (x₂ − x₁)`, `intercept = ŷ₁ − slope · x₁`.
 - Set IV has 10 of 11 points at x = 8, so the derivation must pick points with **different x**. This is an edge case to test explicitly.
+- **Verified by spike (2026-10-18, stats v0.13.0):** deriving coefficients from the fitted points at the smallest and largest x reproduces section 5 exactly for all four sets, including Set IV. When every x is identical, the library itself returns `ErrBounds` ("Input is outside of range."); our code must translate that into a clear message for the user.
 - This is itself a finding for the management recommendation: the Go package is less convenient than `statsmodels` or R's `lm()`, which return coefficients, standard errors, p-values, and diagnostics directly.
 
 ## 7. Non-functional requirements
@@ -146,13 +147,13 @@ Consequences:
 - Multiple regression, standard errors, p-values (noted as a *gap* in the recommendation, not built).
 - A GUI. The application is a command-line program.
 
-## 11. Open questions — **Luis decides before the plan step**
+## 11. Decisions — **approved by Luis, 2026-10-18**
 
-| # | Question | Recommendation |
+| # | Question | Decision |
 |---|---|---|
-| Q1 | Python library: `statsmodels` (Miller's Exhibit 1.1) only, or also time NumPy/SciPy? The assignment notes these can differ — mostly in **speed**, since the coefficients match. | `statsmodels` as primary (matches Miller) + `numpy.polyfit` timed as a second Python row. Shows how much of Python's cost is the library, not the language. |
-| Q2 | R: base `lm()` (Miller's Exhibit 1.2) only? | Yes, base `lm()`; `bench` package for timing + memory. |
-| Q3 | Assertions: standard `testing` only, or add `testify`? | Standard `testing` first (learn the fundamentals); optional `testify` later. |
-| Q4 | Monte Carlo performance benchmark (rubric says "if noted in requirements")? It isn't required here. | Optional stretch goal: repeat the fit on synthetic data of increasing size (100 → 1,000,000 points). Strengthens the Testing score and the recommendation. |
-| Q5 | Executable: the rubric says ".exe on Windows **or** .app on macOS". A Windows `.exe` alone satisfies the literal wording, but a strict grader on a Mac may look for `.app`. Build a `.app` too? | **Yes, build both.** The `.exe` is one Go command. The `.app` is a small wrapper that opens Terminal and runs the program, so its output is visible when double-clicked. Low cost, removes the risk. |
-| Q6 | GitHub repository name? | e.g. `go-anscombe-stats` |
+| Q1 | Python libraries | `statsmodels` OLS (Miller's Exhibit 1.1) as primary; `numpy.polyfit` timed as a second Python row. |
+| Q2 | R | Base `lm()` (Miller's Exhibit 1.2); `bench` package for timing and memory. |
+| Q3 | Test assertions | Go standard library `testing` only. |
+| Q4 | Monte Carlo benchmark | Yes, as a stretch goal: fits on synthetic data of increasing size (100 → 1,000,000 points). |
+| Q5 | Executables | Build both a Windows `.exe` and a macOS `.app` (wrapper that opens Terminal so output is visible). |
+| Q6 | Repository | `github.com/mioluigi/go-anscombe-stats` |
