@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **DRAFT — awaiting Luis's review** |
+| Status | **DRAFT v2 — Gemini review 002 incorporated (`docs/reviews/002-plan-review.md`); awaiting Luis's approval** |
 | Implements | `spec.md` (APPROVED v2) |
 | Governing rules | `docs/constitution.md` |
 
@@ -84,6 +84,13 @@ IV,19,12.50
 its data. **Why:** the `.exe` and `.app` must "run to completion" with no arguments (FR-9, AC-4),
 even when copied away from the repo.
 
+**Why a tiny `data` package instead of embedding in `main.go`?** Go's `//go:embed` can only reach
+files in the same directory as the Go file or below it — never `../`. Embedding from
+`cmd/anscombe/main.go` would force the CSV to live inside `cmd/anscombe/`, which would either make
+Python and R read data from a Go command folder or require a second copy of the data, breaking
+FR-1's single source of truth. A two-line package beside the CSV keeps one data file for all three
+languages. Embedding is a compile-time step, not runtime I/O, so Constitution 4.2 is respected.
+
 ## 4. Package `regression` — the core
 
 ```go
@@ -101,12 +108,18 @@ func FitLine(x, y []float64) (Fit, error)
 1. **Validate first** — return typed errors for: unequal lengths, fewer than 2 points, NaN or ±Inf values.
    *Why:* clear messages for users (FR-10) and no reliance on library error text.
 2. **Call `stats.LinearRegression`** on the points. It returns fitted points, not coefficients.
-3. **Translate `stats.ErrBounds`** (all x identical) into our own `ErrConstantX` with a plain-English message.
-   *Why:* the spike showed the library rejects this case; the user needs to know *why*.
+3. **Wrap `stats.ErrBounds`** (all x identical) with our own sentinel, keeping both in the error chain:
+   `fmt.Errorf("%w: all x values are identical, so no line can be fitted: %w", ErrConstantX, err)`.
+   *Why:* the user gets a plain-English message, and callers can test `errors.Is(err, ErrConstantX)`
+   (or the library's `stats.ErrBounds`) programmatically. Multiple `%w` verbs are supported since Go 1.20.
 4. **Derive coefficients from the fitted points at the minimum and maximum x.**
    `Slope = (ŷmax − ŷmin) / (xmax − xmin)`, `Intercept = ŷmin − Slope · xmin`.
    *Why min and max?* They are guaranteed distinct whenever any two x values differ (handles Set IV),
    and the widest spacing gives the most numerically stable slope.
+   *Precision (measured):* back-deriving from fitted values differs from an independent closed-form OLS
+   by at most **4.4 × 10⁻¹⁶** on the Anscombe data — rounding at the limit of float64. The source code
+   carries a comment explaining *why* coefficients are back-derived (the library discards them), and a
+   test guards precision against an independent closed-form calculation at tolerance 1e-9.
 5. **R² = `stats.Correlation(x, y)`²; means = `stats.Mean`.** All statistics come from the package under test.
 
 **Exported errors:** `ErrLengthMismatch`, `ErrTooFewPoints`, `ErrNotFinite`, `ErrConstantX`, testable with `errors.Is`.
@@ -146,7 +159,8 @@ anscombe -h                 # usage
 |---|---|---|
 | Anscombe table test: 4 sets × intercept, slope, R², mean x, mean y vs. spec section 5 (tolerance 1e-3; means vs. Miller's 9 and 7.5) | `regression_test.go` | AC-1, FR-6 |
 | Synthetic known answers: y = 2x + 1; negative slope; horizontal line (slope 0; R² returned as 0 by the package — see note) | `regression_test.go` | AC-1a |
-| Set IV pattern (repeated x, one differs) and all-identical x → `ErrConstantX` | `regression_test.go` | AC-1b |
+| Set IV pattern (repeated x, one differs) and all-identical x → `errors.Is(err, ErrConstantX)` | `regression_test.go` | AC-1b |
+| Precision guard: `FitLine` vs. an independent closed-form OLS written in the test, tolerance 1e-9 | `regression_test.go` | FR-6, Constitution 1.1 |
 | Invalid inputs: length mismatch, < 2 points, NaN, Inf | `regression_test.go` | AC-5 |
 | CSV parsing: both headers, missing file, wrong columns, non-numeric value with line number, empty file | `dataset_test.go` | AC-5, FR-10 |
 | Embedded data loads and has 4 sets × 11 rows | `data` package test | FR-1 |
@@ -173,6 +187,11 @@ Floating-point checks use a named tolerance constant (Constitution 3.4).
 | Python (NumPy) | same | same | same |
 | R (`lm`) | `bench::mark` | `mem_alloc` KB | 1,000 iterations; median µs |
 
+**One unit for every table: microseconds (µs).** Go's benchmark reports nanoseconds per operation;
+the README converts it (ns/op ÷ 1,000 = µs) so all three languages appear side by side in the same
+unit. The conversion is done by a small script reading the saved benchmark output, not by hand
+(Constitution 1.3), and the README states the conversion under the table. Memory is likewise shown in KB.
+
 **Whole program (FR-13):** `scripts/measure.sh` runs each full program under `/usr/bin/time -l` and
 records wall time and maximum resident set size into `results/whole-program.txt`.
 
@@ -193,6 +212,9 @@ reported with machine details (chip, OS, language versions).
 | macOS binary | `go build -o dist/anscombe ./cmd/anscombe` | Runs in Terminal. |
 | Windows `.exe` | `GOOS=windows GOARCH=amd64 go build -o dist/anscombe.exe ./cmd/anscombe` | Go cross-compiles; no Windows machine needed. |
 | macOS `.app` | `scripts/build-macos-app.sh` | Creates `dist/Anscombe.app` with an `Info.plist` and a launcher that opens Terminal and runs the program, so the output stays visible after a double-click. |
+
+The README states plainly that the `.app` is a **thin wrapper around a command-line program**, built to
+meet the rubric's packaging requirement; the program itself is a terminal application.
 
 ## 10. Documentation
 
