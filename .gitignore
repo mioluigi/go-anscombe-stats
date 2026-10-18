@@ -1,0 +1,19 @@
+# Build outputs
+dist/
+
+# Go profiles and test binaries
+*.out
+*.test
+*.prof
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# R
+.Rhistory
+.RData
+
+# macOS
+.DS_Store
