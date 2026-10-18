@@ -74,7 +74,7 @@ Handling rules:
 | FR-9 | The program runs with **no arguments** on the bundled data. It optionally accepts a path to a user-supplied CSV with `x,y` columns. |
 | FR-10 | Invalid input — missing file, wrong columns, non-numeric values, unequal lengths, fewer than 2 points, all-identical x values — produces a clear message and a non-zero exit code. |
 | FR-12 | **Program logging.** The Go program logs its main steps (data loaded, each set fitted, total elapsed time) with timestamps using the standard library `log/slog`, to standard error so they never mix with the results table. A `-verbose` flag shows debug-level detail. |
-| FR-13 | **Whole-program metrics.** Each language's full program is run under macOS `/usr/bin/time -l`, reporting **wall-clock time (s)** and **maximum resident set size (MB)**. This compares complete programs, including interpreter/runtime start-up, not just the fitting code. |
+| FR-13 | **Whole-program metrics.** Each language's full program is run by a measurement tool (`cmd/measure`) that reads the operating system's per-process resource report (rusage — the same source `/usr/bin/time` uses), reporting **wall-clock time (ms)** and **maximum resident set size (MB)**, median of repeated runs. This compares complete programs, including interpreter/runtime start-up, not just the fitting code. *(Changed in T14: `/usr/bin/time` reports time only to 10 ms, too coarse for the Go program, which finishes in under 1 ms.)* |
 | FR-11 | The README contains: purpose, roles of programs and data, build/run/test/benchmark instructions, results tables (accuracy and performance), and the recommendation to management. |
 
 ## 5. Reference values (the "known answers")
@@ -129,7 +129,7 @@ Consequences:
 - [ ] AC-6 README has every item in FR-11, including a performance table across Go / Python / R.
 - [ ] AC-7 The repo URL ending in `.git` is ready to paste into Canvas.
 - [ ] AC-8 Running the program writes timestamped log lines to standard error (FR-12); `-verbose` adds debug detail.
-- [ ] AC-9 README includes a whole-program table (wall time, max RSS) for Go, Python, and R, produced with `/usr/bin/time -l` (FR-13).
+- [ ] AC-9 README includes a whole-program table (wall time, max RSS) for Go, Python, and R, produced by `scripts/measure.sh` (FR-13).
 
 ## 9. Rubric traceability
 

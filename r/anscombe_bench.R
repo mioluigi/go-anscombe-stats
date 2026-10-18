@@ -9,8 +9,10 @@
 #
 # Usage (from the repository root):
 #   Rscript r/anscombe_bench.R [repetitions]      default repetitions: 1000
+#   Rscript r/anscombe_bench.R --fit-only         coefficients only (for whole-program timing)
 
-library(bench)
+# The bench package is loaded only when benchmarking (bench::mark below), so
+# --fit-only runs measure the analysis alone.
 
 warm_up_runs <- 10
 
@@ -24,11 +26,16 @@ script_dir <- function() {
   dirname(normalizePath(sub("^--file=", "", file_arg)))
 }
 
-# Read the optional repetitions argument, stopping with a clear message if invalid.
+# Read the optional argument: a repetitions count, or --fit-only to print the
+# coefficients and skip the benchmark (used by scripts/measure.sh). Returns 0 for
+# --fit-only; stops with a clear message if the argument is invalid.
 read_repetitions <- function() {
   args <- commandArgs(trailingOnly = TRUE)
   if (length(args) == 0) {
     return(1000L)
+  }
+  if (args[1] == "--fit-only") {
+    return(0L)
   }
   repetitions <- suppressWarnings(as.integer(args[1]))
   if (is.na(repetitions) || repetitions < 1) {
@@ -80,6 +87,9 @@ main <- function() {
   cat(sprintf("%s · bench %s\n", R.version.string, packageVersion("bench")))
   cat(sprintf("Data: anscombe.csv (%d sets)\n\n", length(sets)))
   print_coefficients(sets)
+  if (repetitions == 0) {
+    return(invisible(NULL))
+  }
 
   for (run in seq_len(warm_up_runs)) {
     fit_all(sets)

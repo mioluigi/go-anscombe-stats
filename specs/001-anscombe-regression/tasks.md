@@ -84,7 +84,7 @@
   `r/anscombe_bench.R` (`lm` per set; `bench::mark` 1,000 iterations, median µs, `mem_alloc` KB).
   Done when: committed (R runs only on Luis's Mac — next task).
 
-- [ ] **T13 👤 Run Python and R on the Mac; save results**
+- [x] **T13 👤 Run Python and R on the Mac; save results**
   `python3 -m venv .venv && source .venv/bin/activate && pip install -r python/requirements.txt`
   `python python/anscombe_bench.py > results/python.txt` · `Rscript r/anscombe_bench.R > results/r.txt`
   Done when: both files committed; **R coefficients match spec §5 to 4 decimals** (AC-3).
@@ -92,7 +92,7 @@
 ## Phase 6 — Measurement (FR-7, FR-8, FR-13, NFR-3)
 
 - [ ] **T14 🤖 Measurement scripts**
-  `scripts/measure.sh` (whole program under `/usr/bin/time -l`: wall s, max RSS MB, for Go/Python/R) and `scripts/bench_table.sh` (converts Go ns/op → µs, B → KB for the README).
+  `cmd/measure` (Go tool, test-first: runs a program N times; median wall ms and max RSS MB from rusage), `scripts/measure.sh` (builds and measures Go/Python/R; `--fit-only` added to the Python and R programs), and `scripts/bench_table.sh` (converts Go ns/op → µs, B → KB for the README).
   Done when: scripts committed with usage comments.
 
 - [ ] **T15 👤 Run all measurements on the Mac**

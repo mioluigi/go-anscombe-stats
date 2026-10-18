@@ -11,6 +11,7 @@ Adapted from Miller (2015) Exhibit 1.1 (reference/miller-mtpa-chapter-1-program.
 
 Usage (from the repository root, inside the virtual environment):
     python python/anscombe_bench.py [--repetitions 1000]
+    python python/anscombe_bench.py --fit-only     # coefficients only (for whole-program timing)
 """
 
 import argparse
@@ -97,6 +98,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--repetitions", type=int, default=1000,
                         help="timed runs of the unit of work (default: 1000)")
+    parser.add_argument("--fit-only", action="store_true",
+                        help="print coefficients and skip the benchmark (used by scripts/measure.sh)")
     args = parser.parse_args()
     if args.repetitions < 1:
         parser.error("--repetitions must be at least 1")
@@ -108,6 +111,8 @@ def main():
 
     for method_name, fit in METHODS.items():
         print_coefficients(method_name, fit, sets)
+    if args.fit_only:
+        return
 
     print(f"Unit of work: fit all {len(sets)} sets once; median of {args.repetitions} runs "
           f"after {WARM_UP_RUNS} warm-up runs")

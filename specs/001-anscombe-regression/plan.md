@@ -22,7 +22,7 @@
 | Logging | Standard library `log/slog` | FR-12; no extra dependency. |
 | Python | `statsmodels` + `numpy` + `pandas`, versions pinned in `python/requirements.txt`, installed in a virtual environment | Decision Q1; pinning avoids the matplotlib-style breakage found in Miller's program. |
 | R | Base `lm()`; `bench` package for timing | Decision Q2. |
-| Whole-program metrics | macOS `/usr/bin/time -l` | FR-13; built into macOS, works identically for all three languages. |
+| Whole-program metrics | `cmd/measure` (Go) reading per-process rusage; run by `scripts/measure.sh` | FR-13; same memory source as `/usr/bin/time`, but timing precise below 10 ms. Changed in T14. |
 
 **Verified before planning (spike, see spec section 6):** coefficients derived from the fitted points
 at the smallest and largest x match the reference table for all four sets.
@@ -198,8 +198,10 @@ allocations seen by R's memory profiler, which misses many small allocations (it
 ~2 KB for four `lm()` fits). The README shows each figure with its definition, and uses the
 whole-program maximum resident set size below as the **primary** cross-language memory comparison.
 
-**Whole program (FR-13):** `scripts/measure.sh` runs each full program under `/usr/bin/time -l` and
-records wall time and maximum resident set size into `results/whole-program.txt`.
+**Whole program (FR-13):** `scripts/measure.sh` builds the Go program and runs `cmd/measure`, which starts each full
+program (`--fit-only` mode for Python and R) several times, timing each run with Go's monotonic clock and
+reading maximum resident set size from the operating system's per-process report (rusage). Medians are
+written to `results/whole-program.txt`. *(Changed in T14: `/usr/bin/time` measures time only to 10 ms.)*
 
 **Monte Carlo stretch (Q4):** `BenchmarkFitLine/n=100 … n=1000000` on synthetic data
 y = 3 + 0.5x + noise, generated with a **fixed random seed** so runs are repeatable. Shows how Go
