@@ -76,7 +76,7 @@
 
 ## Phase 5 — Python and R comparisons (FR-4, FR-5, FR-8)
 
-- [ ] **T11 🤖 Python program**
+- [x] **T11 🤖 Python program**
   `python/anscombe_bench.py` (statsmodels primary, NumPy second row; reads `data/anscombe.csv`; coefficients, then timing N = 1,000 with median µs and `tracemalloc` KB) + pinned `python/requirements.txt`.
   Done when: runs in Claude's workspace and prints coefficients matching spec §5.
 
