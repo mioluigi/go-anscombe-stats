@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **DRAFT — awaiting Luis's approval** |
+| Status | **APPROVED — 2026-10-18** (Luis: Claude implements all code tasks, including the former 🎓 tasks) |
 | Implements | `plan.md` (APPROVED v2) → `spec.md` (APPROVED v2) |
 
 ## How to work this list
@@ -11,7 +11,7 @@
 - **Test first.** Tasks marked 🔴 write failing tests; the next task 🟢 makes them pass. Run the tests in
   between and *see them fail* — a test that has never failed has never proven anything.
 - **Who:** 🤖 Claude writes it and pushes · 👤 Luis runs it on his Mac (timings and R must come from
-  his machine) · 🎓 good task to **try writing yourself first** — Claude reviews or takes over if stuck.
+  his machine).
 - **After every task:** `git pull`, read the diff, run the "Verify" command. Tick the box when it passes.
 - **Done when** = the observable result that proves the task is finished.
 
@@ -39,7 +39,7 @@
 
 ## Phase 2 — Package `dataset` (FR-9, FR-10)
 
-- [ ] **T04 🔴🎓 Tests for `dataset.Read`** (table-driven)
+- [ ] **T04 🔴🤖 Tests for `dataset.Read`** (table-driven)
   Cases: valid `set,x,y`; valid `x,y` → one set named "user"; sets returned in first-seen order; errors with **line numbers** for non-numeric value, wrong column count, empty input, unknown header.
   Done when: `go test ./dataset/` **fails** (no implementation yet).
 
@@ -70,7 +70,7 @@
   Build the binary once in `TestMain`, then run it: no arguments → exit 0 and a 4-row table; `-data missing.csv` → exit 1 with a clear message; bad flag → exit 2; logs appear on stderr, never stdout.
   Done when: `go test ./cmd/anscombe/` **fails**.
 
-- [ ] **T10 🟢🎓 Implement `main.go`**
+- [ ] **T10 🟢🤖 Implement `main.go`**
   Flags (`-data`, `-verbose`), `slog` to stderr, `tabwriter` table, exit codes 0/1/2, short named functions.
   Done when: `go test ./...` passes and `go run ./cmd/anscombe` prints the table.
 
