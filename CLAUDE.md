@@ -31,5 +31,5 @@ go run ./cmd/anscombe                                 # run the program on the b
 ## Layout
 
 `regression/` fitting (no I/O) · `dataset/` CSV reading · `data/` the shared Anscombe CSV, embedded ·
-`cmd/anscombe/` the program · `python/`, `r/` comparison programs · `reference/` Miller's originals (do not edit) ·
+`cmd/anscombe/` the program · `cmd/measure/` whole-program timing tool (macOS/Linux) · `python/`, `r/` comparison programs · `reference/` Miller's originals (do not edit) ·
 `scripts/` measurement and packaging · `results/` captured outputs.

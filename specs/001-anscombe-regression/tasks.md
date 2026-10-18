@@ -91,7 +91,7 @@
 
 ## Phase 6 — Measurement (FR-7, FR-8, FR-13, NFR-3)
 
-- [ ] **T14 🤖 Measurement scripts**
+- [x] **T14 🤖 Measurement scripts**
   `cmd/measure` (Go tool, test-first: runs a program N times; median wall ms and max RSS MB from rusage), `scripts/measure.sh` (builds and measures Go/Python/R; `--fit-only` added to the Python and R programs), and `scripts/bench_table.sh` (converts Go ns/op → µs, B → KB for the README).
   Done when: scripts committed with usage comments.
 
