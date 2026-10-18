@@ -19,7 +19,7 @@
 
 ## Phase 0 — Setup
 
-- [ ] **T00 👤 Check tools on the Mac** (plan §11)
+- [x] **T00 👤 Check tools on the Mac** (plan §11)
   Run: `go version; python3 --version; R --version | head -1; Rscript -e 'library(bench)' && echo "bench OK"`
   Done when: all four print a version / "bench OK"; anything missing installed per plan §11.
 
