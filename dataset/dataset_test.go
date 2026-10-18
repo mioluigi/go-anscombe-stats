@@ -77,6 +77,7 @@ func TestReadInvalid(t *testing.T) {
 		{"y is not a number", "set,x,y\nI,1,\n", ErrNotNumber, `line 2: y value ""`},
 		{"NaN is rejected", "x,y\nNaN,1\n", ErrNotNumber, "line 2"},
 		{"infinity is rejected", "x,y\n1,Inf\n", ErrNotNumber, "line 2"},
+		{"negative infinity is rejected", "x,y\n-Inf,1\n", ErrNotNumber, "line 2"},
 		{"empty set name", "set,x,y\n,1,2\n", ErrSetName, "line 2"},
 		{"malformed quoting", "x,y\n\"1,2\n", ErrMalformed, "line"},
 	}

@@ -39,11 +39,11 @@
 
 ## Phase 2 — Package `dataset` (FR-9, FR-10)
 
-- [ ] **T04 🔴🤖 Tests for `dataset.Read`** (table-driven)
+- [x] **T04 🔴🤖 Tests for `dataset.Read`** (table-driven)
   Cases: valid `set,x,y`; valid `x,y` → one set named "user"; sets returned in first-seen order; errors with **line numbers** for non-numeric value, wrong column count, empty input, unknown header.
   Done when: `go test ./dataset/` **fails** (no implementation yet).
 
-- [ ] **T05 🟢 Implement `dataset.Read`**
+- [x] **T05 🟢 Implement `dataset.Read`**
   Done when: `go test -cover ./dataset/` passes with ≥ 90% coverage.
 
 ## Phase 3 — Package `regression` (FR-2, FR-3, FR-6)
