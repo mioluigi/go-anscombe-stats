@@ -80,7 +80,7 @@
   `python/anscombe_bench.py` (statsmodels primary, NumPy second row; reads `data/anscombe.csv`; coefficients, then timing N = 1,000 with median µs and `tracemalloc` KB) + pinned `python/requirements.txt`.
   Done when: runs in Claude's workspace and prints coefficients matching spec §5.
 
-- [ ] **T12 🤖 R program**
+- [x] **T12 🤖 R program**
   `r/anscombe_bench.R` (`lm` per set; `bench::mark` 1,000 iterations, median µs, `mem_alloc` KB).
   Done when: committed (R runs only on Luis's Mac — next task).
 
