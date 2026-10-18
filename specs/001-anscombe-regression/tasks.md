@@ -66,11 +66,11 @@
 
 ## Phase 4 — The program `cmd/anscombe` (FR-9, FR-10, FR-12)
 
-- [ ] **T09 🔴 End-to-end tests**
+- [x] **T09 🔴 End-to-end tests**
   Build the binary once in `TestMain`, then run it: no arguments → exit 0 and a 4-row table; `-data missing.csv` → exit 1 with a clear message; bad flag → exit 2; logs appear on stderr, never stdout.
   Done when: `go test ./cmd/anscombe/` **fails**.
 
-- [ ] **T10 🟢🤖 Implement `main.go`**
+- [x] **T10 🟢🤖 Implement `main.go`**
   Flags (`-data`, `-verbose`), `slog` to stderr, `tabwriter` table, exit codes 0/1/2, short named functions.
   Done when: `go test ./...` passes and `go run ./cmd/anscombe` prints the table.
 
