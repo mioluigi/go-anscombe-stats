@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **DRAFT v2 — Gemini review 002 incorporated (`docs/reviews/002-plan-review.md`); awaiting Luis's approval** |
+| Status | **APPROVED v2 — 2026-10-18** (Gemini review: `docs/reviews/002-plan-review.md`) |
 | Implements | `spec.md` (APPROVED v2) |
 | Governing rules | `docs/constitution.md` |
 
