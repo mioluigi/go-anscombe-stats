@@ -101,7 +101,7 @@
 
 ## Phase 7 — Executables (NFR-6, AC-4, Q5)
 
-- [ ] **T16 🤖 Build scripts**
+- [x] **T16 🤖 Build scripts**
   `scripts/build-macos-app.sh` (creates `dist/Anscombe.app`) and documented `.exe` cross-compile command.
   Done when: committed.
 
