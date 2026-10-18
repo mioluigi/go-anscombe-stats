@@ -34,10 +34,17 @@ else
 fi
 
 # 2. A script Terminal runs: show the results, then wait so the window stays readable.
+#    Progress logs (standard error) go to the usual place for macOS app logs, so
+#    the window shows only the results; an error message is still shown if one occurs.
 cat >"$app/Contents/Resources/run-in-terminal.command" <<'EOF'
 #!/bin/bash
 clear
-"$(dirname "$0")/anscombe"
+log_file="$HOME/Library/Logs/Anscombe.log"
+mkdir -p "$(dirname "$log_file")"
+if ! "$(dirname "$0")/anscombe" 2>>"$log_file"; then
+  echo "The analysis could not finish. Details: $log_file"
+  tail -n 3 "$log_file"
+fi
 echo
 read -r -p "Press Return to close this window. " _
 EOF

@@ -105,7 +105,7 @@
   `scripts/build-macos-app.sh` (creates `dist/Anscombe.app`) and documented `.exe` cross-compile command.
   Done when: committed.
 
-- [ ] **T17 👤 Build and try all three**
+- [x] **T17 👤 Build and try all three**
   Build the binary, the `.exe`, and the `.app`; double-click `Anscombe.app` and confirm the table appears.
   Done when: all three build; `.app` shows the results.
 
