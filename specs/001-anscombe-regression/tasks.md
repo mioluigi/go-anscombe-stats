@@ -95,7 +95,7 @@
   `cmd/measure` (Go tool, test-first: runs a program N times; median wall ms and max RSS MB from rusage), `scripts/measure.sh` (builds and measures Go/Python/R; `--fit-only` added to the Python and R programs), and `scripts/bench_table.sh` (converts Go ns/op → µs, B → KB for the README).
   Done when: scripts committed with usage comments.
 
-- [ ] **T15 👤 Run all measurements on the Mac**
+- [x] **T15 👤 Run all measurements on the Mac**
   `go test -run=^$ -bench=. -benchmem -count=10 ./regression/ > results/go-bench.txt`, then `scripts/measure.sh`, then the profile commands (plan §8). Record machine details.
   Done when: `results/` committed with all outputs.
 
