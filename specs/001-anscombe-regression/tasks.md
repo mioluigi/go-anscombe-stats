@@ -23,17 +23,17 @@
   Run: `go version; python3 --version; R --version | head -1; Rscript -e 'library(bench)' && echo "bench OK"`
   Done when: all four print a version / "bench OK"; anything missing installed per plan §11.
 
-- [ ] **T01 🤖 Project scaffolding**
+- [x] **T01 🤖 Project scaffolding**
   `CLAUDE.md` (project context and key commands), `.gitignore` (`dist/`, `*.out`, `.venv/`, `__pycache__/`), `docs/decisions.md` (empty log).
   Done when: files committed. Verify: `cat CLAUDE.md`
 
-- [ ] **T02 🤖 Go module**
+- [x] **T02 🤖 Go module**
   `go mod init github.com/mioluigi/go-anscombe-stats`; require `github.com/montanaflynn/stats v0.13.0`.
   Done when: `go.mod` and `go.sum` committed. Verify: `go mod verify`
 
 ## Phase 1 — Data (FR-1)
 
-- [ ] **T03 🤖 Shared data file + embed package + test**
+- [x] **T03 🤖 Shared data file + embed package + test**
   `data/anscombe.csv` (44 rows, `set,x,y`, transcribed from Miller Table 1.1), `data/embed.go`, `data/embed_test.go` (4 sets × 11 rows; overall mean x = 9, mean y ≈ 7.5).
   Done when: test passes. Verify: `go test ./data/`
 
