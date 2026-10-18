@@ -1,0 +1,13 @@
+File: regression.test
+Type: alloc_space
+Time: 2026-10-18 19:36:59 EDT
+Showing nodes accounting for 10394.50MB, 99.52% of 10444.52MB total
+Dropped 35 nodes (cum <= 52.22MB)
+      flat  flat%   sum%        cum   cum%
+ 8791.11MB 84.17% 84.17%  8791.11MB 84.17%  github.com/montanaflynn/stats.LinearRegression
+ 1602.89MB 15.35% 99.52%  1602.89MB 15.35%  github.com/mioluigi/go-anscombe-stats/regression.toSeries (inline)
+    0.50MB 0.0048% 99.52% 10394.50MB 99.52%  github.com/mioluigi/go-anscombe-stats/regression.FitLine
+         0     0% 99.52% 10440.30MB   100%  github.com/mioluigi/go-anscombe-stats/regression.BenchmarkFitLine.func1
+         0     0% 99.52% 10325.89MB 98.86%  testing.(*B).launch
+         0     0% 99.52%   114.41MB  1.10%  testing.(*B).run1.func1
+         0     0% 99.52% 10440.30MB   100%  testing.(*B).runN

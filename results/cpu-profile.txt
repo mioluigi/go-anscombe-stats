@@ -1,0 +1,22 @@
+File: regression.test
+Type: cpu
+Time: 2026-10-18 19:36:57 EDT
+Duration: 2.32s, Total samples = 1.85s (79.86%)
+Showing nodes accounting for 1.81s, 97.84% of 1.85s total
+Showing top 15 nodes out of 87
+      flat  flat%   sum%        cum   cum%
+     0.54s 29.19% 29.19%      0.55s 29.73%  github.com/montanaflynn/stats.Sum (inline)
+     0.47s 25.41% 54.59%      0.47s 25.41%  runtime.madvise
+     0.35s 18.92% 73.51%      0.35s 18.92%  github.com/montanaflynn/stats.Float64Data.Get (inline)
+     0.10s  5.41% 78.92%      0.10s  5.41%  runtime.memmove
+     0.06s  3.24% 82.16%      0.06s  3.24%  runtime.pthread_cond_wait
+     0.06s  3.24% 85.41%      0.06s  3.24%  runtime.usleep
+     0.05s  2.70% 88.11%      0.07s  3.78%  github.com/montanaflynn/stats._variance
+     0.05s  2.70% 90.81%      0.05s  2.70%  runtime.pthread_kill
+     0.03s  1.62% 92.43%      1.14s 61.62%  github.com/mioluigi/go-anscombe-stats/regression.FitLine
+     0.03s  1.62% 94.05%      0.03s  1.62%  runtime.kevent
+     0.02s  1.08% 95.14%      0.02s  1.08%  runtime.asyncPreempt
+     0.02s  1.08% 96.22%      0.02s  1.08%  runtime.memclrNoHeapPointers
+     0.01s  0.54% 96.76%      0.01s  0.54%  github.com/mioluigi/go-anscombe-stats/regression.coefficientsFromFittedLine (inline)
+     0.01s  0.54% 97.30%      0.03s  1.62%  github.com/mioluigi/go-anscombe-stats/regression.noisyLine
+     0.01s  0.54% 97.84%      0.13s  7.03%  github.com/montanaflynn/stats.LinearRegression

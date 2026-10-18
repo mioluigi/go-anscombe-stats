@@ -9,4 +9,4 @@ III   11     3.0025   0.4997   0.6663   9.0000   7.5000
 IV    11     3.0017   0.4999   0.6667   9.0000   7.5009
 
 Unit of work: fit all 4 sets once; median of 1000 runs after 10 warm-up runs
-benchmark language=r library=lm runs=1000 median_us=900.2 alloc_kb=1.8
+benchmark language=r library=lm runs=1000 median_us=838.9 alloc_kb=1.8

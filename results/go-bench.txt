@@ -1,0 +1,66 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/mioluigi/go-anscombe-stats/regression
+cpu: Apple M1 Max
+BenchmarkFitAnscombe-10    	 1274212	       927.7 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitAnscombe-10    	 1297462	       925.8 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitAnscombe-10    	 1297010	       925.0 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitAnscombe-10    	 1297672	       923.6 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitAnscombe-10    	 1300588	       923.7 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitAnscombe-10    	 1299087	       928.9 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitAnscombe-10    	 1293433	       921.6 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitAnscombe-10    	 1297255	       919.5 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitAnscombe-10    	 1299702	       922.0 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitAnscombe-10    	 1288692	       931.0 ns/op	    2560 B/op	      20 allocs/op
+BenchmarkFitLine/n=100-10  	  656498	      1822 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=100-10  	  665701	      1826 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=100-10  	  659998	      1875 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=100-10  	  632025	      1997 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=100-10  	  626402	      1898 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=100-10  	  587578	      1854 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=100-10  	  657180	      1831 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=100-10  	  668568	      1879 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=100-10  	  663310	      1840 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=100-10  	  663780	      1842 ns/op	    5840 B/op	       8 allocs/op
+BenchmarkFitLine/n=1000-10 	   59914	     20188 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=1000-10 	   59022	     20159 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=1000-10 	   59430	     20124 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=1000-10 	   59652	     20573 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=1000-10 	   59839	     20816 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=1000-10 	   59036	     20924 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=1000-10 	   55381	     21011 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=1000-10 	   58356	     20950 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=1000-10 	   56035	     21303 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=1000-10 	   58416	     21005 ns/op	   66768 B/op	      12 allocs/op
+BenchmarkFitLine/n=10000-10         	    5696	    212958 ns/op	  849107 B/op	      19 allocs/op
+BenchmarkFitLine/n=10000-10         	    5684	    208739 ns/op	  849107 B/op	      19 allocs/op
+BenchmarkFitLine/n=10000-10         	    5860	    208994 ns/op	  849107 B/op	      19 allocs/op
+BenchmarkFitLine/n=10000-10         	    5554	    208499 ns/op	  849107 B/op	      19 allocs/op
+BenchmarkFitLine/n=10000-10         	    5812	    209981 ns/op	  849107 B/op	      19 allocs/op
+BenchmarkFitLine/n=10000-10         	    5758	    209412 ns/op	  849107 B/op	      19 allocs/op
+BenchmarkFitLine/n=10000-10         	    5578	    210511 ns/op	  849107 B/op	      19 allocs/op
+BenchmarkFitLine/n=10000-10         	    5713	    208951 ns/op	  849107 B/op	      19 allocs/op
+BenchmarkFitLine/n=10000-10         	    5811	    209019 ns/op	  849107 B/op	      19 allocs/op
+BenchmarkFitLine/n=10000-10         	    5850	    211996 ns/op	  849106 B/op	      19 allocs/op
+BenchmarkFitLine/n=100000-10        	     562	   2133878 ns/op	10548452 B/op	      29 allocs/op
+BenchmarkFitLine/n=100000-10        	     554	   2165973 ns/op	10548462 B/op	      29 allocs/op
+BenchmarkFitLine/n=100000-10        	     549	   2142820 ns/op	10548457 B/op	      29 allocs/op
+BenchmarkFitLine/n=100000-10        	     559	   2146338 ns/op	10548460 B/op	      29 allocs/op
+BenchmarkFitLine/n=100000-10        	     561	   2160311 ns/op	10548461 B/op	      29 allocs/op
+BenchmarkFitLine/n=100000-10        	     554	   2149838 ns/op	10548462 B/op	      29 allocs/op
+BenchmarkFitLine/n=100000-10        	     555	   2173098 ns/op	10548462 B/op	      29 allocs/op
+BenchmarkFitLine/n=100000-10        	     556	   2159116 ns/op	10548458 B/op	      29 allocs/op
+BenchmarkFitLine/n=100000-10        	     560	   2138144 ns/op	10548459 B/op	      29 allocs/op
+BenchmarkFitLine/n=100000-10        	     553	   2170843 ns/op	10548461 B/op	      29 allocs/op
+BenchmarkFitLine/n=1000000-10       	      60	  19596199 ns/op	104043769 B/op	      39 allocs/op
+BenchmarkFitLine/n=1000000-10       	      55	  19644352 ns/op	104043754 B/op	      39 allocs/op
+BenchmarkFitLine/n=1000000-10       	      58	  19606950 ns/op	104043753 B/op	      39 allocs/op
+BenchmarkFitLine/n=1000000-10       	      56	  19617571 ns/op	104043756 B/op	      39 allocs/op
+BenchmarkFitLine/n=1000000-10       	      55	  19594369 ns/op	104043750 B/op	      39 allocs/op
+BenchmarkFitLine/n=1000000-10       	      55	  20752317 ns/op	104043756 B/op	      39 allocs/op
+BenchmarkFitLine/n=1000000-10       	      52	  20572257 ns/op	104043777 B/op	      39 allocs/op
+BenchmarkFitLine/n=1000000-10       	      61	  20418449 ns/op	104043768 B/op	      39 allocs/op
+BenchmarkFitLine/n=1000000-10       	      55	  19890408 ns/op	104043766 B/op	      39 allocs/op
+BenchmarkFitLine/n=1000000-10       	      54	  19588002 ns/op	104043757 B/op	      39 allocs/op
+PASS
+ok  	github.com/mioluigi/go-anscombe-stats/regression	87.807s

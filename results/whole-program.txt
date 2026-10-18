@@ -1,0 +1,7 @@
+Whole-program measurement: analysis once per run, median of 5 runs
+Machine: Darwin arm64 · Apple M1 Max · macOS 27.0.1
+Go: go1.27.2 · Python: 3.12.8 · R: 4.4.2
+
+wholeprogram language=go runs=5 median_wall_ms=11.80 median_maxrss_mb=5.0
+wholeprogram language=python runs=5 median_wall_ms=1873.69 median_maxrss_mb=162.2
+wholeprogram language=r runs=5 median_wall_ms=154.28 median_maxrss_mb=76.0
