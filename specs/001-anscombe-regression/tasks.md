@@ -60,7 +60,7 @@
   Including the *why* comment on back-deriving coefficients (plan §4) and wrapped errors.
   Done when: `go test -cover ./regression/` passes with ≥ 90% coverage; `go vet ./...` clean.
 
-- [ ] **T08 🤖 Benchmarks** (FR-7, Q4)
+- [x] **T08 🤖 Benchmarks** (FR-7, Q4)
   `BenchmarkFitAnscombe` (the shared unit of work: all four fits) and `BenchmarkFitLine/n=100 … n=1000000` (synthetic, fixed seed).
   Done when: `go test -run=^$ -bench=. -benchmem ./regression/` prints ns/op, B/op, allocs/op.
 
