@@ -2,7 +2,7 @@
 
 | Field | Value |
 |---|---|
-| Status | **DRAFT — awaiting Luis's review** |
+| Status | **DRAFT v2 — Gemini review incorporated (see `docs/reviews/001-spec-review.md`); awaiting answers to section 11** |
 | Owner | Luis Varela |
 | Course deliverable | Week 4 Assignment: Go for Statistics (100 pts) |
 | Governing rules | `docs/constitution.md` |
@@ -70,9 +70,11 @@ Handling rules:
 | FR-5a | Miller's original Python and R programs are kept unmodified in the repo; the README explains how the adapted versions differ and why. |
 | FR-6 | Go unit tests assert Go coefficients equal the reference values within tolerance **1e-3** (reference values are reported to 4 decimals). |
 | FR-7 | Go benchmarks report time per operation and memory/allocations per operation. |
-| FR-8 | Python and R report comparable execution time (repeated runs, summarized) and memory use. |
+| FR-8 | Python and R time the **same unit of work as Go** (fit all four regressions once), repeated **N = 1,000** times after a warm-up, and report the **median time per run in microseconds (µs)**. They also report memory allocated by that work: Python via `tracemalloc` (peak KB), R via `bench::mark` (`mem_alloc`, KB). Performance is **measured and reported, not pass/fail**. |
 | FR-9 | The program runs with **no arguments** on the bundled data. It optionally accepts a path to a user-supplied CSV with `x,y` columns. |
 | FR-10 | Invalid input — missing file, wrong columns, non-numeric values, unequal lengths, fewer than 2 points, all-identical x values — produces a clear message and a non-zero exit code. |
+| FR-12 | **Program logging.** The Go program logs its main steps (data loaded, each set fitted, total elapsed time) with timestamps using the standard library `log/slog`, to standard error so they never mix with the results table. A `-verbose` flag shows debug-level detail. |
+| FR-13 | **Whole-program metrics.** Each language's full program is run under macOS `/usr/bin/time -l`, reporting **wall-clock time (s)** and **maximum resident set size (MB)**. This compares complete programs, including interpreter/runtime start-up, not just the fitting code. |
 | FR-11 | The README contains: purpose, roles of programs and data, build/run/test/benchmark instructions, results tables (accuracy and performance), and the recommendation to management. |
 
 ## 5. Reference values (the "known answers")
@@ -90,7 +92,7 @@ Three independent sources agree:
 | III | 3.0025 | 0.4997 | 0.6663 |
 | IV  | 3.0017 | 0.4999 | 0.6667 |
 
-**Still to confirm:** R `lm()` output from Miller's Exhibit 1.2, run on Luis's Mac. It is recorded in the README when available.
+**R expectation:** R's `lm()` must reproduce this same table to 4 decimals (AC-3). The values are already defined; running R on Luis's Mac only *confirms* them, and the output is recorded in the README.
 
 ## 6. Key finding that shapes the plan ⚠️
 
@@ -112,24 +114,28 @@ Consequences:
 | NFR-3 | CPU and memory profiles generated once; how to reproduce is documented. | Testing |
 | NFR-4 | Statistics logic is a reusable package, separate from the program's input/output. | Design |
 | NFR-5 | A grader can go from `git clone` to results in ≤ 5 documented commands. | Documentation / Application |
-| NFR-6 | The executable runs to completion on macOS; Windows `.exe` build command documented. | Application |
+| NFR-6 | Documented build commands produce: a macOS command-line binary, a **Windows `.exe`** (Go cross-compilation), and — per Q5 — a macOS **`.app`** bundle. The program runs to completion on macOS. | Application |
 
 ## 8. Acceptance criteria (definition of done)
 
-- [ ] AC-1 `go test ./...` passes; the correctness tests compare all 4 sets × (intercept, slope) against section 5.
+- [ ] AC-1 `go test ./...` passes; the correctness tests compare all 4 sets × (intercept, slope, R², mean x, mean y) against section 5 and Miller's published summary.
+- [ ] AC-1a **Synthetic known-answer tests** pass: a perfect line (e.g., y = 2x + 1 → slope 2, intercept 1, R² 1), a negative slope, and a horizontal line (slope 0).
+- [ ] AC-1b **Distinct-x derivation tests** pass: coefficients are derived correctly when most x values repeat (Set IV pattern: one x differs from the rest), and an error — not a divide-by-zero — is returned when every x is identical.
 - [ ] AC-2 `go test -bench=. -benchmem ./...` prints ns/op, B/op, allocs/op.
-- [ ] AC-3 Python and R programs run and print coefficients matching section 5 to 4 decimals, plus timing and memory.
-- [ ] AC-4 `go build` produces an executable that prints a 4-row results table with no arguments.
+- [ ] AC-3 Python and R programs run and print coefficients matching section 5 to 4 decimals, plus median µs per run (N = 1,000) and allocated KB, as defined in FR-8.
+- [ ] AC-4 `go build` produces an executable that prints a 4-row results table with no arguments; the documented `.exe` (and `.app`, if chosen in Q5) build commands succeed.
 - [ ] AC-5 Each invalid-input case in FR-10 has a test and a friendly message.
 - [ ] AC-6 README has every item in FR-11, including a performance table across Go / Python / R.
 - [ ] AC-7 The repo URL ending in `.git` is ready to paste into Canvas.
+- [ ] AC-8 Running the program writes timestamped log lines to standard error (FR-12); `-verbose` adds debug detail.
+- [ ] AC-9 README includes a whole-program table (wall time, max RSS) for Go, Python, and R, produced with `/usr/bin/time -l` (FR-13).
 
 ## 9. Rubric traceability
 
 | Rubric criterion (20 pts each) | Satisfied by |
 |---|---|
 | Coding rules, organization, aesthetics | NFR-1, Constitution Art. 2 |
-| Testing and software metrics | FR-6, FR-7, FR-8, NFR-2, NFR-3, AC-1, AC-2, AC-5 |
+| Testing and software metrics | FR-6, FR-7, FR-8, FR-12, FR-13, NFR-2, NFR-3, AC-1, AC-1a, AC-1b, AC-2, AC-5, AC-8, AC-9 |
 | Design and development | FR-1, FR-3, NFR-4 |
 | Documentation | FR-11, NFR-5, AC-6, AC-7 |
 | Application | FR-9, FR-10, NFR-6, AC-4 |
@@ -148,5 +154,5 @@ Consequences:
 | Q2 | R: base `lm()` (Miller's Exhibit 1.2) only? | Yes, base `lm()`; `bench` package for timing + memory. |
 | Q3 | Assertions: standard `testing` only, or add `testify`? | Standard `testing` first (learn the fundamentals); optional `testify` later. |
 | Q4 | Monte Carlo performance benchmark (rubric says "if noted in requirements")? It isn't required here. | Optional stretch goal: repeat the fit on synthetic data of increasing size (100 → 1,000,000 points). Strengthens the Testing score and the recommendation. |
-| Q5 | Executable: plain macOS binary, or also wrap as a `.app`? | Plain binary + documented Windows `.exe` cross-compile. |
+| Q5 | Executable: the rubric says ".exe on Windows **or** .app on macOS". A Windows `.exe` alone satisfies the literal wording, but a strict grader on a Mac may look for `.app`. Build a `.app` too? | **Yes, build both.** The `.exe` is one Go command. The `.app` is a small wrapper that opens Terminal and runs the program, so its output is visible when double-clicked. Low cost, removes the risk. |
 | Q6 | GitHub repository name? | e.g. `go-anscombe-stats` |

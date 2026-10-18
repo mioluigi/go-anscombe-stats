@@ -59,6 +59,6 @@
 ## Article 7 — How we work with AI tools
 
 7.1 **Claude Code** is the only tool that writes files in this repo during a task.
-7.2 **Gemini Code Assist** reviews specs, plans, and diffs, and gives inline completions only when Luis is typing by hand.
+7.2 **Gemini (web, gemini.google.com)** independently reviews specs, plans, and diffs. It does not edit the repo. (The Gemini Code Assist VS Code extension no longer supports individual accounts, so it is not used.)
 7.3 Luis approves every spec, plan, and task list before implementation, and reads every diff before it is committed.
 7.4 If implementation reveals the spec is wrong, **update the spec first**, then the code.
