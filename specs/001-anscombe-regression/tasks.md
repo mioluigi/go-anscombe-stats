@@ -111,7 +111,7 @@
 
 ## Phase 8 — Documentation and submission (FR-11, US-5)
 
-- [ ] **T18 🤖 README**
+- [x] **T18 🤖 README**
   Every FR-11 section, results tables in µs/KB (from `results/`), data-scientist concerns (incl. flat-line R² = 0, coefficients not returned directly, no standard errors/p-values), recommendation to management.
   Done when: every item in AC-6 and AC-9 is present.
 
