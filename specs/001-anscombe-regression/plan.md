@@ -192,6 +192,12 @@ the README converts it (ns/op ÷ 1,000 = µs) so all three languages appear side
 unit. The conversion is done by a small script reading the saved benchmark output, not by hand
 (Constitution 1.3), and the README states the conversion under the table. Memory is likewise shown in KB.
 
+**Component memory is not comparable across languages (found in T12).** Go `-benchmem` reports
+bytes allocated per run; Python `tracemalloc` reports peak traced bytes; R `bench` reports
+allocations seen by R's memory profiler, which misses many small allocations (it showed only
+~2 KB for four `lm()` fits). The README shows each figure with its definition, and uses the
+whole-program maximum resident set size below as the **primary** cross-language memory comparison.
+
 **Whole program (FR-13):** `scripts/measure.sh` runs each full program under `/usr/bin/time -l` and
 records wall time and maximum resident set size into `results/whole-program.txt`.
 
