@@ -119,7 +119,7 @@
   Upload README, `regression.go`, `main.go`, and the rubric summary; triage into `docs/reviews/003-…`.
   Done when: review recorded and accepted changes made.
 
-- [ ] **T20 👤🤖 Final acceptance check and submission**
+- [x] **T20 👤🤖 Final acceptance check and submission**
   Walk spec §8 (every AC) and the rubric table; fresh `git clone` into a temporary folder and follow the README from scratch.
   Done when: every box ticked; `https://github.com/mioluigi/go-anscombe-stats.git` pasted into Canvas.
 

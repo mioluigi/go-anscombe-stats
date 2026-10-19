@@ -127,7 +127,7 @@ Consequences:
 - [x] AC-4 `go build` produces an executable that prints a 4-row results table with no arguments; the documented `.exe` (and `.app`, if chosen in Q5) build commands succeed.
 - [x] AC-5 Each invalid-input case in FR-10 has a test and a friendly message.
 - [x] AC-6 README has every item in FR-11, including a performance table across Go / Python / R.
-- [ ] AC-7 The repo URL ending in `.git` is ready to paste into Canvas.
+- [x] AC-7 The repo URL ending in `.git` is ready to paste into Canvas.
 - [x] AC-8 Running the program writes timestamped log lines to standard error (FR-12); `-verbose` adds debug detail.
 - [x] AC-9 README includes a whole-program table (wall time, max RSS) for Go, Python, and R, produced by `scripts/measure.sh` (FR-13).
 
