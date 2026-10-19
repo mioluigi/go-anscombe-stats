@@ -115,7 +115,7 @@
   Every FR-11 section, results tables in µs/KB (from `results/`), data-scientist concerns (incl. flat-line R² = 0, coefficients not returned directly, no standard errors/p-values), recommendation to management.
   Done when: every item in AC-6 and AC-9 is present.
 
-- [ ] **T19 👤 Gemini review of README and code**
+- [x] **T19 👤 Gemini review of README and code**
   Upload README, `regression.go`, `main.go`, and the rubric summary; triage into `docs/reviews/003-…`.
   Done when: review recorded and accepted changes made.
 
