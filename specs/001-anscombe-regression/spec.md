@@ -119,17 +119,17 @@ Consequences:
 
 ## 8. Acceptance criteria (definition of done)
 
-- [ ] AC-1 `go test ./...` passes; the correctness tests compare all 4 sets × (intercept, slope, R², mean x, mean y) against section 5 and Miller's published summary.
-- [ ] AC-1a **Synthetic known-answer tests** pass: a perfect line (e.g., y = 2x + 1 → slope 2, intercept 1, R² 1), a negative slope, and a horizontal line (slope 0).
-- [ ] AC-1b **Distinct-x derivation tests** pass: coefficients are derived correctly when most x values repeat (Set IV pattern: one x differs from the rest), and an error — not a divide-by-zero — is returned when every x is identical.
-- [ ] AC-2 `go test -bench=. -benchmem ./...` prints ns/op, B/op, allocs/op.
-- [ ] AC-3 Python and R programs run and print coefficients matching section 5 to 4 decimals, plus median µs per run (N = 1,000) and allocated KB, as defined in FR-8.
-- [ ] AC-4 `go build` produces an executable that prints a 4-row results table with no arguments; the documented `.exe` (and `.app`, if chosen in Q5) build commands succeed.
-- [ ] AC-5 Each invalid-input case in FR-10 has a test and a friendly message.
-- [ ] AC-6 README has every item in FR-11, including a performance table across Go / Python / R.
+- [x] AC-1 `go test ./...` passes; the correctness tests compare all 4 sets × (intercept, slope, R², mean x, mean y) against section 5 and Miller's published summary.
+- [x] AC-1a **Synthetic known-answer tests** pass: a perfect line (e.g., y = 2x + 1 → slope 2, intercept 1, R² 1), a negative slope, and a horizontal line (slope 0).
+- [x] AC-1b **Distinct-x derivation tests** pass: coefficients are derived correctly when most x values repeat (Set IV pattern: one x differs from the rest), and an error — not a divide-by-zero — is returned when every x is identical.
+- [x] AC-2 `go test -bench=. -benchmem ./...` prints ns/op, B/op, allocs/op.
+- [x] AC-3 Python and R programs run and print coefficients matching section 5 to 4 decimals, plus median µs per run (N = 1,000) and allocated KB, as defined in FR-8.
+- [x] AC-4 `go build` produces an executable that prints a 4-row results table with no arguments; the documented `.exe` (and `.app`, if chosen in Q5) build commands succeed.
+- [x] AC-5 Each invalid-input case in FR-10 has a test and a friendly message.
+- [x] AC-6 README has every item in FR-11, including a performance table across Go / Python / R.
 - [ ] AC-7 The repo URL ending in `.git` is ready to paste into Canvas.
-- [ ] AC-8 Running the program writes timestamped log lines to standard error (FR-12); `-verbose` adds debug detail.
-- [ ] AC-9 README includes a whole-program table (wall time, max RSS) for Go, Python, and R, produced by `scripts/measure.sh` (FR-13).
+- [x] AC-8 Running the program writes timestamped log lines to standard error (FR-12); `-verbose` adds debug detail.
+- [x] AC-9 README includes a whole-program table (wall time, max RSS) for Go, Python, and R, produced by `scripts/measure.sh` (FR-13).
 
 ## 9. Rubric traceability
 
